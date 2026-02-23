@@ -1,0 +1,57 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Candidate Enrollment</h2>
+
+    <form (ngSubmit)="submit()">
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          placeholder="Enter candidate name"
+          [(ngModel)]="candidate.name"
+          name="name"
+          required
+        >
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          placeholder="Enter email address"
+          [(ngModel)]="candidate.email"
+          name="email"
+          required
+        >
+      </div>
+
+      <div class="input-group">
+        <label for="roleApplied">Role Applied</label>
+        <input
+          type="text"
+          placeholder="Enter role"
+          [(ngModel)]="candidate.roleApplied"
+          name="roleApplied"
+          required
+        >
+      </div>
+
+      <div class="input-group">
+        <label for="status">Current Status</label>
+        <select
+          [(ngModel)]="candidate.currentStatus"
+          name="status"
+        >
+          <option value="APPLIED">APPLIED</option>
+          <option value="SHORTLISTED">SHORTLISTED</option>
+          <option value="INTERVIEW_SCHEDULED">INTERVIEW SCHEDULED</option>
+          <option value="INTERVIEWED">INTERVIEWED</option>
+          <option value="SELECTED">SELECTED</option>
+          <option value="REJECTED">REJECTED</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Add Candidate</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div *ngIf="candidate" class="candidate-detail-container">
+  <div class="header">
+    <h2>{{ candidate.name }}</h2>
+    <div>
+      <span class="status-badge" [ngClass]="candidate.currentStatus">
+        {{ candidate.currentStatus }}
+      </span>
+      <button *ngIf="role === 'HR'" class="delete-btn" (click)="deleteCandidate()">
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <div class="candidate-info">
+    <p><strong>Role Applied:</strong> {{ candidate.roleApplied }}</p>
+    <p *ngIf="candidate.interviewDate">
+      <strong>Interview Scheduled:</strong>
+      {{ candidate.interviewDate | date:'full' }}
+    </p>
+  </div>
+
+  <!-- RESUME SECTION -->
+  <div class="resume-section">
+    <h4>📎 Resume</h4>
+    <div *ngIf="candidate.resume?.url" class="resume-actions">
+      <button class="download-btn" (click)="downloadResume()">
+        📄 Download Resume
+      </button>
+      <button *ngIf="role === 'HR'" class="delete-resume-btn" (click)="deleteResume()">
+        🗑️ Delete
+      </button>
+    </div>
+    <div *ngIf="!candidate.resume?.url && role === 'HR'" class="upload-section">
+      <input type="file" #fileInput (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" style="display: none">
+      <button class="upload-btn" (click)="fileInput.click()">
+        📄 Upload Resume
+      </button>
+    </div>
+    <p *ngIf="!candidate.resume?.url && role !== 'HR'" class="no-resume">No resume uploaded</p>
+  </div>
+
+  <div class="notes-section" *ngIf="candidate.notes?.length">
+    <h4>Notes</h4>
+    <ul>
+      <li *ngFor="let note of candidate.notes">{{ note }}</li>
+    </ul>
+  </div>
+
+  <div class="tags-section" *ngIf="candidate.tags?.length">
+    <h4>Skills / Tags</h4>
+    <div class="tags-container">
+      <span *ngFor="let tag of candidate.tags" class="tag">{{ tag }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- INTERVIEW FEEDBACK -->
+<div class="feedback-card"
+     *ngIf="role === 'INTERVIEWER' && !candidate?.feedbackLocked">
+
+  <h3>Interview Feedback</h3>
+
+  <!-- Rating -->
+  <label>Rating</label>
+  <select [(ngModel)]="feedback.rating">
+    <option value="0">Select rating</option>
+    <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
+      {{ r }} ⭐
+    </option>
+  </select>
+
+  <!-- Comments -->
+  <label>Comments</label>
+  <textarea
+    [(ngModel)]="feedback.comments"
+    placeholder="Enter interview comments">
+  </textarea>
+
+  <!-- Recommendation -->
+  <label>Final Recommendation</label>
+  <select [(ngModel)]="feedback.recommendation">
+    <option value="">Select</option>
+    <option value="HIRE">Hire</option>
+    <option value="HOLD">Hold</option>
+    <option value="REJECT">Reject</option>
+  </select>
+
+  <button (click)="submitFeedback()">
+    Submit Feedback
+  </button>
+</div>
+
+<!-- LOCKED FEEDBACK VIEW -->
+<div class="feedback-view"
+     *ngIf="candidate?.feedbackLocked">
+
+  <h3>Interview Feedback</h3>
+  <p>⭐ Rating: {{ candidate?.feedback?.rating }}</p>
+  <p><b>Recommendation:</b> {{ candidate?.feedback?.recommendation }}</p>
+  <p><b>Comments:</b> {{ candidate?.feedback?.comments }}</p>
+</div>
+
+<div *ngIf="!candidate" class="loading-text">
+  <p>Loading candidate details...</p>
+</div>

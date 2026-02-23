@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  padding: 20px;
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, rgba(33, 6, 5, 0.8), rgba(4, 36, 23, 0.8));
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 24px 40px;
+  margin-bottom: 30px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-section h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 5px 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #cbd5e0;
+  margin: 0;
+  font-weight: 500;
+}
+
+.view-btn {
+  background: linear-gradient(135deg, #024339, #060235);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(2, 67, 57, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(2, 67, 57, 0.5);
+  background: linear-gradient(135deg, #060235, #024339);
+}
+
+.view-btn span {
+  font-size: 18px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #ffffff, #f0f9f4);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  border-left: 5px solid;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 40px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.badge {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-body {
+  margin-top: 12px;
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 800;
+  color: #042417;
+  margin: 0 0 8px 0;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.stat-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card.total {
+  border-left-color: #3498db;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+.stat-card.applied {
+  border-left-color: #075e22;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+}
+
+.stat-card.shortlisted {
+  border-left-color: #f39c12;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+}
+
+.stat-card.scheduled {
+  border-left-color: #060749;
+  background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+}
+
+.stat-card.interviewed {
+  border-left-color: #9b59b6;
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+}
+
+.stat-card.selected {
+  border-left-color: #0db84a;
+  background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
+}
+
+.stat-card.rejected {
+  border-left-color: #e74c3c;
+  background: linear-gradient(135deg, #ffebee, #ffcdd2);
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .logo-section h1 {
+    font-size: 24px;
+  }
+  
+  .stat-number {
+    font-size: 40px;
+  }
+}

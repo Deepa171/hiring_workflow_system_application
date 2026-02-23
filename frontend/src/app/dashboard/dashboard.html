@@ -1,0 +1,92 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <h1>📊 Recruitment Dashboard</h1>
+        <p class="subtitle">Real-time hiring analytics</p>
+      </div>
+      <button class="view-btn" (click)="navigateToCandidates()">
+        <span>📋</span> View All Candidates
+      </button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card total" (click)="navigateToCandidates()">
+      <div class="card-header">
+        <span class="icon">👥</span>
+        <span class="badge">Total</span>
+      </div>
+      <div class="card-body">
+        <h2 class="stat-number">{{ stats.totalCandidates }}</h2>
+        <p class="stat-label">Total Candidates</p>
+      </div>
+    </div>
+
+    <div class="stat-card applied" (click)="navigateToCandidates()">
+      <div class="card-header">
+        <span class="icon">📝</span>
+        <span class="badge">New</span>
+      </div>
+      <div class="card-body">
+        <h2 class="stat-number">{{ stats.applied }}</h2>
+        <p class="stat-label">Applied</p>
+      </div>
+    </div>
+
+    <div class="stat-card shortlisted" (click)="navigateToCandidates()">
+      <div class="card-header">
+        <span class="icon">⭐</span>
+        <span class="badge">Active</span>
+      </div>
+      <div class="card-body">
+        <h2 class="stat-number">{{ stats.shortlisted }}</h2>
+        <p class="stat-label">Shortlisted</p>
+      </div>
+    </div>
+
+    <div class="stat-card scheduled" (click)="navigateToCandidates()">
+      <div class="card-header">
+        <span class="icon">📅</span>
+        <span class="badge">Pending</span>
+      </div>
+      <div class="card-body">
+        <h2 class="stat-number">{{ stats.scheduled }}</h2>
+        <p class="stat-label">Scheduled</p>
+      </div>
+    </div>
+
+    <div class="stat-card interviewed" (click)="navigateToCandidates()">
+      <div class="card-header">
+        <span class="icon">💼</span>
+        <span class="badge">Review</span>
+      </div>
+      <div class="card-body">
+        <h2 class="stat-number">{{ stats.interviewed }}</h2>
+        <p class="stat-label">Interviewed</p>
+      </div>
+    </div>
+
+    <div class="stat-card selected" (click)="navigateToCandidates()">
+      <div class="card-header">
+        <span class="icon">✅</span>
+        <span class="badge">Success</span>
+      </div>
+      <div class="card-body">
+        <h2 class="stat-number">{{ stats.selected }}</h2>
+        <p class="stat-label">Selected</p>
+      </div>
+    </div>
+
+    <div class="stat-card rejected" (click)="navigateToCandidates()">
+      <div class="card-header">
+        <span class="icon">❌</span>
+        <span class="badge">Closed</span>
+      </div>
+      <div class="card-body">
+        <h2 class="stat-number">{{ stats.rejected }}</h2>
+        <p class="stat-label">Rejected</p>
+      </div>
+    </div>
+  </div>
+</div>
