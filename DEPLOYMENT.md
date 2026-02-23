@@ -28,7 +28,7 @@ git push -u origin main
    - **Start Command**: npm start
    - **Environment**: Node
 
-6. Add Environment Variables:
+6. Add Environment Variables (ek saath copy-paste karo):
    ```
    MONGO_URI=mongodb+srv://itsdk4838_db_user:e6SyWWWk3IspErLr@cluster0.xoymdew.mongodb.net/hiring_workflow?retryWrites=true&w=majority&appName=Cluster0
    JWT_SECRET=my_super_secret_key_123
@@ -39,6 +39,7 @@ git push -u origin main
    CLOUDINARY_API_SECRET=N1Sx9GoHIen45kzJwdeDNdwRcsM
    PORT=5000
    ```
+   **Note**: Render pe "Add from .env" option hai, ya ek-ek karke add karo
 
 7. Click "Create Web Service"
 8. Copy your backend URL (e.g., https://hiring-workflow-backend.onrender.com)
