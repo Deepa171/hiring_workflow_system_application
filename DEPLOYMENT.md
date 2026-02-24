@@ -46,18 +46,24 @@ git push -u origin main
 
 ## 🌐 Step 3: Frontend Deployment (Vercel)
 
-1. Update API URLs in frontend services with your Render backend URL
+1. **First, update production API URL**:
+   - Open `frontend/src/environments/environment.prod.ts`
+   - Replace `https://your-backend-url.onrender.com/api` with your actual Render backend URL
+   - Commit and push changes
+
 2. Go to https://vercel.com
 3. Sign up/Login with GitHub
 4. Click "Add New" → "Project"
 5. Import your GitHub repository
 6. Configure:
-   - **Framework Preset**: Angular
+   - **Framework Preset**: Other
    - **Root Directory**: frontend
-   - **Build Command**: npm run build
-   - **Output Directory**: dist/frontend/browser
+   - **Build Command**: `npm install && npm run build`
+   - **Output Directory**: `dist/frontend/browser`
+   - **Install Command**: `npm install`
 
 7. Click "Deploy"
+8. Wait for deployment to complete (3-5 minutes)
 
 ## ✅ Post-Deployment
 
