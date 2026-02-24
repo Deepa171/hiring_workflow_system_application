@@ -37,6 +37,7 @@ git push -u origin main
    CLOUDINARY_CLOUD_NAME=dpooy85mi
    CLOUDINARY_API_KEY=426875285213151
    CLOUDINARY_API_SECRET=N1Sx9GoHIen45kzJwdeDNdwRcsM
+   FRONTEND_URL=https://hiring-workflow-system-application.vercel.app
    PORT=5000
    ```
    **Note**: Render pe "Add from .env" option hai, ya ek-ek karke add karo
