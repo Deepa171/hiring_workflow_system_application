@@ -50,22 +50,6 @@
   background: linear-gradient(135deg, #2980b9, #3498db);
 }
 
-.link-btn {
-  background: linear-gradient(135deg, #024339, #060235);
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.link-btn:hover {
-  background: linear-gradient(135deg, #060235, #024339);
-  transform: scale(1.05);
-}
-
 /* ===== FILTER BAR ===== */
 .filter-bar {
   display: flex;
@@ -93,41 +77,29 @@
   box-shadow: 0 0 0 3px rgba(2, 67, 57, 0.2);
 }
 
-/* ===== KANBAN ===== */
-.kanban-board {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 0 20px 20px 20px;
+/* ===== CANDIDATES CONTAINER ===== */
+.candidates-container {
+  padding: 0 20px 20px;
 }
 
-.column {
-  min-width: 320px;
-  background: linear-gradient(135deg, rgba(33, 6, 5, 0.7), rgba(4, 36, 23, 0.7));
-  border-radius: 12px;
-  padding: 16px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+.status-section {
+  margin-bottom: 30px;
 }
 
-.column-header {
+.status-title {
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 18px;
+  color: #024339;
+  margin-bottom: 16px;
   display: flex;
-  justify-content: space-between;
-  color: #fff;
-  font-size: 15px;
+  align-items: center;
+  gap: 10px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 12px 16px;
-  background: linear-gradient(135deg, rgba(7, 94, 34, 0.4), rgba(6, 7, 73, 0.4));
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
 }
 
 .count {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #024339, #060235);
   color: #fff;
   padding: 4px 12px;
   border-radius: 12px;
@@ -135,69 +107,60 @@
   font-weight: 600;
 }
 
-/* ===== CARD ===== */
-.card {
-  background: linear-gradient(135deg, #ffffff, #f0f9f4);
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* ===== CANDIDATE CARD ===== */
+.candidate-card {
+  background: #fff;
   border-radius: 12px;
-  padding: 18px;
-  margin-bottom: 14px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-  cursor: grab;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  border: 1px solid rgba(7, 94, 34, 0.15);
-  position: relative;
-  overflow: hidden;
+  border-left: 4px solid #024339;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(135deg, #075e22, #060749);
+.candidate-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  border-color: rgba(7, 94, 34, 0.3);
-}
-
-.card-top {
+.card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 10px;
 }
 
-.card h3 {
+.candidate-card h3 {
   margin: 0;
   font-size: 18px;
   color: #042417;
   font-weight: 700;
-  letter-spacing: 0.3px;
+  flex: 1;
+  cursor: pointer;
 }
 
-.role {
-  font-size: 14px;
-  color: #024339;
-  margin: 6px 0 10px 0;
-  font-weight: 500;
-  font-style: italic;
-}
-
-/* ===== BADGES ===== */
-.badge {
-  padding: 6px 12px;
-  font-size: 11px;
+.status-badge {
+  padding: 4px 10px;
+  font-size: 10px;
   border-radius: 12px;
   color: white;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
+
+.status-badge.APPLIED { background: linear-gradient(135deg, #075e22, #0a8f35); }
+.status-badge.SHORTLISTED { background: linear-gradient(135deg, #024339, #036b54); }
+.status-badge.INTERVIEW_SCHEDULED { background: linear-gradient(135deg, #060749, #0a0d7a); }
+.status-badge.INTERVIEWED { background: linear-gradient(135deg, #5a3d8a, #7a4db8); }
+.status-badge.SELECTED { background: linear-gradient(135deg, #0a8f35, #0db84a); }
+.status-badge.REJECTED { background: linear-gradient(135deg, #4a0605, #7a0a08); }
 
 .status-dropdown {
   padding: 6px 10px;
@@ -211,7 +174,6 @@
   letter-spacing: 0.3px;
   cursor: pointer;
   transition: all 0.3s ease;
-  max-width: 180px;
 }
 
 .status-dropdown:focus {
@@ -220,114 +182,89 @@
   box-shadow: 0 0 0 3px rgba(2, 67, 57, 0.2);
 }
 
-.APPLIED { background: linear-gradient(135deg, #075e22, #0a8f35); }
-.SHORTLISTED { background: linear-gradient(135deg, #024339, #036b54); }
-.INTERVIEW_SCHEDULED { background: linear-gradient(135deg, #060749, #0a0d7a); }
-.INTERVIEWED { background: linear-gradient(135deg, #5a3d8a, #7a4db8); }
-.SELECTED { background: linear-gradient(135deg, #0a8f35, #0db84a); }
-.REJECTED { background: linear-gradient(135deg, #4a0605, #7a0a08); }
+.role {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+  cursor: pointer;
+}
 
 /* ===== TAGS ===== */
 .tags {
-  margin-top: 8px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .tag {
   background: linear-gradient(135deg, #024339, #060235);
   color: #fff;
-  padding: 5px 10px;
+  padding: 4px 10px;
   border-radius: 12px;
   font-size: 11px;
   font-weight: 500;
 }
 
-/* ===== NOTES ===== */
-.notes {
-  margin-top: 10px;
+.interview-info {
   font-size: 13px;
-  color: #333;
-  background: rgba(148, 225, 172, 0.2);
+  color: #666;
+  margin-top: 8px;
   padding: 8px;
-  border-radius: 6px;
-}
-
-.notes ul {
-  margin: 4px 0;
-  padding-left: 20px;
-}
-
-/* ===== ADD NOTE/TAGS ===== */
-.add-note, .add-tags, .add-interview {
-  margin-top: 10px;
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.add-note input, .add-tags input, .add-interview input, .add-interview select {
-  flex: 1;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  font-size: 12px;
-  min-width: 120px;
-}
-
-.add-note button, .add-tags button, .add-interview button {
-  padding: 8px 12px;
-  background: linear-gradient(135deg, #024339, #060235);
-  color: white;
-  border: none;
+  background: rgba(155, 89, 182, 0.1);
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  transition: all 0.3s ease;
 }
 
-.add-note button:hover, .add-tags button:hover, .add-interview button:hover {
-  background: linear-gradient(135deg, #060235, #024339);
-  transform: scale(1.05);
-}
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 16px;
+    margin: 10px;
+    padding: 16px;
+  }
 
-/* ===== INTERVIEW ===== */
-.interview {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #333;
-  background: rgba(155, 89, 182, 0.1);
-  padding: 6px;
-  border-radius: 6px;
-  font-weight: 500;
-}
+  .page-header h1 {
+    font-size: 22px;
+  }
 
-/* ===== ACTIONS ===== */
-.actions {
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-end;
-}
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+  }
 
-/* ===== TIMELINE ===== */
-.timeline {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 8px;
-}
+  .primary-btn, .secondary-btn {
+    width: 100%;
+    padding: 12px;
+  }
 
-.timeline li {
-  padding: 8px 10px;
-  margin-bottom: 6px;
-  border-left: 3px solid #024339;
-  background: rgba(148, 225, 172, 0.2);
-  font-size: 13px;
-  border-radius: 4px;
-}
+  .filter-bar {
+    flex-direction: column;
+    margin: 0 10px 10px;
+    padding: 12px;
+  }
 
-.timeline small {
-  color: #555;
-  font-weight: 500;
+  .candidates-container {
+    padding: 0 10px 10px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .status-title {
+    font-size: 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .status-badge, .status-dropdown {
+    align-self: flex-start;
+  }
 }

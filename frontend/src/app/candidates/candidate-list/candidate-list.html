@@ -34,156 +34,46 @@
   />
 </div>
 
-<!-- ================= KANBAN BOARD ================= -->
-<div class="kanban-board">
-
-  <!-- ===== HR / RECRUITER VIEW ===== -->
-  <ng-container *ngIf="role === 'HR' || role === 'RECRUITER'">
-
-    <div
-      class="column"
-      *ngFor="let status of statuses"
-      cdkDropList
-      [id]="status"
-      [cdkDropListData]="candidatesByStatus[status] || []"
-      [cdkDropListConnectedTo]="statuses"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div class="column-header">
+<!-- ================= CANDIDATES LIST ================= -->
+<div class="candidates-container">
+  <ng-container *ngFor="let status of statuses">
+    <div class="status-section" *ngIf="candidatesByStatus[status]?.length">
+      <h2 class="status-title">
         {{ status }}
-        <span class="count">
-          {{ candidatesByStatus[status]?.length || 0 }}
-        </span>
-      </div>
-
-      <div
-        class="card"
-        *ngFor="let candidate of candidatesByStatus[status]"
-        cdkDrag
-      >
-        <div class="card-top">
-          <h3>{{ candidate.name }}</h3>
-          <select 
-            class="status-dropdown"
-            [(ngModel)]="candidate.currentStatus"
-            (change)="changeStatus(candidate, candidate.currentStatus)"
-          >
-            <option value="APPLIED">APPLIED</option>
-            <option value="SHORTLISTED">SHORTLISTED</option>
-            <option value="INTERVIEW_SCHEDULED">INTERVIEW_SCHEDULED</option>
-            <option value="INTERVIEWED">INTERVIEWED</option>
-            <option value="SELECTED">SELECTED</option>
-            <option value="REJECTED">REJECTED</option>
-          </select>
-        </div>
-
-        <p class="role">{{ candidate.roleApplied }}</p>
-
-        <!-- TAGS -->
-        <div class="tags" *ngIf="candidate.tags?.length">
-          <span class="tag" *ngFor="let tag of candidate.tags">
-            {{ tag }}
-          </span>
-        </div>
-
-        <!-- NOTES -->
-        <div class="notes" *ngIf="candidate.notes?.length">
-          <strong>Notes:</strong>
-          <ul>
-            <li *ngFor="let note of candidate.notes">{{ note }}</li>
-          </ul>
-        </div>
-        <!-- ADD NOTE -->
-<div class="add-note">
-  <input
-    type="text"
-    placeholder="Add note"
-    [(ngModel)]="noteInput[candidate._id]"
-  />
-  <button (click)="addNoteToCandidate(candidate)">
-    Add Note
-  </button>
-</div>
-
-<!-- ADD TAGS -->
-<div class="add-tags">
-  <input
-    type="text"
-    placeholder="Add tags (comma separated)"
-    [(ngModel)]="tagInput[candidate._id]"
-  />
-  <button (click)="updateTagsForCandidate(candidate)">
-    Add Tags
-  </button>
-</div>
-
-<!-- SCHEDULE INTERVIEW (Only for HR and SHORTLISTED status) -->
-<div class="add-interview" *ngIf="role === 'HR' && candidate.currentStatus === 'SHORTLISTED'">
-  <input
-    type="date"
-    placeholder="Interview date"
-    [(ngModel)]="interviewDateInput[candidate._id]"
-  />
-  <select [(ngModel)]="interviewerIdInput[candidate._id]">
-    <option value="">Select Interviewer</option>
-    <option *ngFor="let interviewer of interviewers" [value]="interviewer._id">
-      {{ interviewer.email }}
-    </option>
-  </select>
-  <button (click)="scheduleInterviewForCandidate(candidate)">
-    Save
-  </button>
-</div>
-
-
-        <!-- INTERVIEW DATE -->
-        <div class="interview" *ngIf="candidate.interviewDate">
-          📅 Interview: {{ candidate.interviewDate | date:'medium' }}
-        </div>
-
-        <!-- ACTIONS -->
-        <div class="actions">
-          <button
-            class="link-btn"
-            (click)="openCandidate(candidate._id); $event.stopPropagation()">
-            View
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </ng-container>
-
-  <!-- ===== INTERVIEWER VIEW ===== -->
-  <ng-container *ngIf="role === 'INTERVIEWER'">
-    <div class="column">
-      <div class="column-header">
-        MY INTERVIEWS
-        <span class="count">
-          {{ candidatesByStatus['INTERVIEW_SCHEDULED']?.length || 0 }}
-        </span>
-      </div>
-
-      <div
-        class="card"
-        *ngFor="let candidate of candidatesByStatus['INTERVIEW_SCHEDULED']"
-      >
-        <h3>{{ candidate.name }}</h3>
-        <p class="role">{{ candidate.roleApplied }}</p>
-
-        <div *ngIf="candidate.interviewDate">
-          📅 Interview: {{ candidate.interviewDate | date:'medium' }}
-        </div>
-
-        <div class="actions">
-          <button
-            class="link-btn"
-            (click)="openCandidate(candidate._id); $event.stopPropagation()">
-            View
-          </button>
+        <span class="count">{{ candidatesByStatus[status]?.length }}</span>
+      </h2>
+      
+      <div class="cards-grid">
+        <div class="candidate-card" *ngFor="let candidate of candidatesByStatus[status]">
+          <div class="card-header">
+            <h3 (click)="openCandidate(candidate._id)">{{ candidate.name }}</h3>
+            <select 
+              *ngIf="role === 'HR' || role === 'RECRUITER'"
+              class="status-dropdown"
+              [(ngModel)]="candidate.currentStatus"
+              (change)="changeStatus(candidate, candidate.currentStatus)"
+              (click)="$event.stopPropagation()">
+              <option value="APPLIED">APPLIED</option>
+              <option value="SHORTLISTED">SHORTLISTED</option>
+              <option value="INTERVIEW_SCHEDULED">INTERVIEW_SCHEDULED</option>
+              <option value="INTERVIEWED">INTERVIEWED</option>
+              <option value="SELECTED">SELECTED</option>
+              <option value="REJECTED">REJECTED</option>
+            </select>
+            <span *ngIf="role === 'INTERVIEWER'" class="status-badge" [ngClass]="candidate.currentStatus">{{ candidate.currentStatus }}</span>
+          </div>
+          
+          <p class="role" (click)="openCandidate(candidate._id)">{{ candidate.roleApplied }}</p>
+          
+          <div class="tags" *ngIf="candidate.tags?.length" (click)="openCandidate(candidate._id)">
+            <span class="tag" *ngFor="let tag of candidate.tags">{{ tag }}</span>
+          </div>
+          
+          <div class="interview-info" *ngIf="candidate.interviewDate" (click)="openCandidate(candidate._id)">
+            📅 {{ candidate.interviewDate | date:'short' }}
+          </div>
         </div>
       </div>
     </div>
   </ng-container>
-
 </div>

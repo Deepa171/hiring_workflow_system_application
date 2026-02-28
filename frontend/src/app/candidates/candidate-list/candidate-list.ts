@@ -105,7 +105,6 @@ candidatesByStatus: Record<string, CandidateData[]> = {
       }
       this.candidates = candidates;
       this.groupCandidatesByStatus();
-      this.cd.detectChanges()
     },
     error: err => {}
   });
@@ -166,12 +165,11 @@ candidatesByStatus: Record<string, CandidateData[]> = {
 
   changeStatus(candidate: CandidateData, status: string) {
     this.candidateService.updateStatus(candidate._id, status).subscribe({
-      next: () => {
+      next: (res: any) => {
         candidate.currentStatus = status;
-        this.groupCandidatesByStatus();
-        this.cd.detectChanges();
+        this.loadCandidates();
       },
-      error: err => alert(err.error.message)
+      error: err => alert(err.error?.message || 'Failed to update status')
     });
   }
 
@@ -209,7 +207,6 @@ candidatesByStatus: Record<string, CandidateData[]> = {
       next: (res: any) => {
         candidate.notes = res.data?.notes || candidate.notes;
         this.noteInput[candidate._id] = '';
-        this.cd.detectChanges();
       },
       error: err => alert(err.error.message)
     });
@@ -231,7 +228,6 @@ candidatesByStatus: Record<string, CandidateData[]> = {
         candidate.tags = res.data?.tags ||candidate.tags;
         this.tagInput[candidate._id] = '';
         this.groupCandidatesByStatus();
-        this.cd.detectChanges();
       },
       error: err => alert(err.error.message)
     });
