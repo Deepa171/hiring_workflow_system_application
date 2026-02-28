@@ -51,23 +51,7 @@ if (req.user.role !== "HR" && req.user.role !== "RECRUITER") {
 
     const oldStatus = candidate.currentStatus;
 
-    // ✅ Allowed transitions
-    const allowedTransitions = {
-      APPLIED: ['SHORTLISTED', 'REJECTED'],
-      SHORTLISTED: ['INTERVIEW_SCHEDULED', 'REJECTED'],
-      INTERVIEW_SCHEDULED: ['INTERVIEWED', 'REJECTED'],
-      INTERVIEWED: ['SELECTED', 'REJECTED'],
-      SELECTED: [],
-      REJECTED: []
-    };
-
-     if (
-      !allowedTransitions[candidate.currentStatus] ||
-      !allowedTransitions[candidate.currentStatus].includes(status)
-    ) {
-      return res.status(400).json({ message: 'Invalid status transition' });
-    }
-
+    // ✅ Allow all status transitions for dropdown
     candidate.currentStatus = status;
      candidate.timeline.push({
       action: 'STATUS_CHANGED',
