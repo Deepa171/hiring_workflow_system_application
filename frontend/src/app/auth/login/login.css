@@ -48,6 +48,29 @@
   box-sizing: border-box;
 }
 
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+
 .input-group input:focus {
   outline: none;
   border-color: #075e22;
@@ -73,4 +96,44 @@ button:hover:not(:disabled) {
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.demo-credentials {
+  margin-top: 20px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(7,94,34,0.07), rgba(6,7,73,0.07));
+  border-radius: 8px;
+  border: 1px dashed #075e22;
+  font-size: 13px;
+}
+
+.demo-title {
+  font-weight: 700;
+  color: #060749;
+  margin: 0 0 10px 0;
+  text-align: center;
+  font-size: 13px;
+}
+
+.credential-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.credential-row:last-child {
+  margin-bottom: 0;
+}
+
+.role {
+  background: linear-gradient(135deg, #075e22, #060749);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 72px;
+  text-align: center;
 }

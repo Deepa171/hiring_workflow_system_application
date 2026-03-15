@@ -17,6 +17,7 @@ export class LoginComponent {
   email = '';
   password = '';
   isLoading = false;
+  showPassword = false;
 
   constructor(
     private http: HttpClient,

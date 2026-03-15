@@ -14,16 +14,33 @@
 
     <div class="input-group">
       <label>Password</label>
-      <input
-        type="password"
-        placeholder="Enter your password"
-        [(ngModel)]="password"
-      />
+      <div class="password-wrapper">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Enter your password"
+          [(ngModel)]="password"
+        />
+        <span class="eye-icon" (click)="showPassword = !showPassword">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </span>
+      </div>
     </div>
 
     <button (click)="login()" [disabled]="isLoading">
       {{ isLoading ? 'Signing In...' : 'Sign In' }}
     </button>
+
+    <div class="demo-credentials">
+      <p class="demo-title">🔑 Demo Credentials</p>
+      <div class="credential-row">
+        <span class="role">HR / Recruiter</span>
+        <span>admin&#64;gmail.com / admin123</span>
+      </div>
+      <div class="credential-row">
+        <span class="role">Interviewer</span>
+        <span>interviewer&#64;gmail.com / 1234</span>
+      </div>
+    </div>
 
   </div>
 </div>
